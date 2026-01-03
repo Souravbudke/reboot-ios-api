@@ -43,15 +43,13 @@ export async function POST(
             stock: body.stock || 0,
             is_available: body.is_available !== false,
             images: body.images || [],
-            condition_details: {
-                battery_health: body.battery_health || null,
-                warranty_months: body.warranty_months || 0,
-                cosmetic_grade: body.cosmetic_grade || null,
-                functional_grade: body.functional_grade || null,
-                tested: body.tested !== false,
-                certified: body.certified !== false,
-                refurbished: body.refurbished !== false
-            }
+            battery_health: body.battery_health || null,
+            warranty_months: body.warranty_months || 0,
+            cosmetic_grade: body.cosmetic_grade || null,
+            functional_grade: body.functional_grade || null,
+            tested: body.tested !== false,
+            certified: body.certified !== false,
+            refurbished: body.refurbished !== false
         }
 
         const { data, error } = await supabase

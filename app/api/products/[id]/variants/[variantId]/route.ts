@@ -46,19 +46,13 @@ export async function PUT(
         if (body.images !== undefined) updateData.images = body.images
 
         // Handle condition_details as nested object
-        if (body.battery_health !== undefined || body.warranty_months !== undefined ||
-            body.cosmetic_grade !== undefined || body.functional_grade !== undefined ||
-            body.tested !== undefined || body.certified !== undefined || body.refurbished !== undefined) {
-            updateData.condition_details = {
-                battery_health: body.battery_health,
-                warranty_months: body.warranty_months,
-                cosmetic_grade: body.cosmetic_grade,
-                functional_grade: body.functional_grade,
-                tested: body.tested,
-                certified: body.certified,
-                refurbished: body.refurbished
-            }
-        }
+        if (body.battery_health !== undefined) updateData.battery_health = body.battery_health
+        if (body.warranty_months !== undefined) updateData.warranty_months = body.warranty_months
+        if (body.cosmetic_grade !== undefined) updateData.cosmetic_grade = body.cosmetic_grade
+        if (body.functional_grade !== undefined) updateData.functional_grade = body.functional_grade
+        if (body.tested !== undefined) updateData.tested = body.tested
+        if (body.certified !== undefined) updateData.certified = body.certified
+        if (body.refurbished !== undefined) updateData.refurbished = body.refurbished
 
         updateData.updated_at = new Date().toISOString()
 
