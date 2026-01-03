@@ -88,7 +88,6 @@ async function handleUserCreated(data: ClerkWebhookEvent['data']) {
         email,
         name,
         role,
-        profile_image: data.image_url,
         created_at: new Date(data.created_at).toISOString(),
     })
 
@@ -111,7 +110,6 @@ async function handleUserUpdated(data: ClerkWebhookEvent['data']) {
             email,
             name,
             role,
-            profile_image: data.image_url,
             updated_at: new Date(data.updated_at).toISOString(),
         })
         .eq('clerk_id', data.id)
