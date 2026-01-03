@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 import { handleError, successResponse, ApiError } from '@/lib/errors'
 import { createOrderSchema } from '@/lib/validation'
 
-// GET /api/orders - Get user's orders
+// GET /api/orders - Get user's orders (Admin sees all)
 export async function GET(request: NextRequest) {
     try {
         const { userId } = await auth()
@@ -13,11 +13,25 @@ export async function GET(request: NextRequest) {
             throw new ApiError(401, 'Unauthorized')
         }
 
-        const { data, error } = await supabase
+        // Check if user is admin
+        const { data: userData } = await supabase
+            .from('users')
+            .select('role')
+            .eq('clerk_id', userId)
+            .single()
+
+        const isAdmin = userData?.role === 'admin'
+
+        let query = supabase
             .from('orders')
             .select('*')
-            .eq('user_id', userId)
-            .order('created_at', { ascending: false })
+
+        // If not admin, restrict to own orders
+        if (!isAdmin) {
+            query = query.eq('user_id', userId)
+        }
+
+        const { data, error } = await query.order('created_at', { ascending: false })
 
         if (error) throw error
 
