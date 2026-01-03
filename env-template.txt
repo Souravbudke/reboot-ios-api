@@ -10,3 +10,5 @@ CLERK_WEBHOOK_SECRET=whsec_your_webhook_signing_secret_here
 # App Configuration  
 NEXT_PUBLIC_API_URL=http://localhost:3000/api
 
+
+API_SECRET_KEY="your_generated_secret_key"

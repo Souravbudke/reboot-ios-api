@@ -11,12 +11,12 @@ const isPublicRoute = createRouteMatcher([
 ])
 
 export default clerkMiddleware(async (auth, request) => {
-    // Add CORS headers
     const response = NextResponse.next()
 
+    // Add CORS headers
     response.headers.set('Access-Control-Allow-Origin', '*')
     response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-api-key')
 
     // Handle preflight requests
     if (request.method === 'OPTIONS') {
@@ -24,6 +24,16 @@ export default clerkMiddleware(async (auth, request) => {
             status: 204,
             headers: response.headers
         })
+    }
+
+    // SECURITY CHECK:
+    // Allow access if a valid API Key is provided (for iOS App)
+    // OR if the user is authenticated via Clerk
+    const paramApiKey = request.headers.get('x-api-key')
+    const validApiKey = process.env.API_SECRET_KEY || 'vfavU5jLSM59NdLKIaEIDd+STCgaijE2XLmITRA7wso='
+
+    if (paramApiKey === validApiKey) {
+        return response // Allow access with valid API Key
     }
 
     // Protect private routes
