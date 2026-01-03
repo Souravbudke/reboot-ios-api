@@ -1,0 +1,10 @@
+# Supabase Configuration
+SUPABASE_URL=https://wtnysxqseanefgddicyh.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0bnlzeHFzZWFuZWZnZGRpY3loIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NzMzNTMwOCwiZXhwIjoyMDgyOTExMzA4fQ.Ud6y8Je2rlK_mhLAhrso10suOdoTQbAchiifknTA-cs
+
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_c3dlZXQtdGFkcG9sZS0yNS5jbGVyay5hY2NvdW50cy5kZXYk
+CLERK_SECRET_KEY=your_clerk_secret_key_here
+
+# App Configuration  
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
