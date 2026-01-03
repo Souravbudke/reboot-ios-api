@@ -83,6 +83,24 @@ async function handleUserCreated(data: ClerkWebhookEvent['data']) {
     const name = [data.first_name, data.last_name].filter(Boolean).join(' ') || 'User'
     const role = (data.public_metadata?.role as string) || 'customer'
 
+    // Skip users without email - email is required in our DB
+    if (!email) {
+        console.log(`Skipping user ${data.id} - no email address`)
+        return
+    }
+
+    // Check if user already exists
+    const { data: existingUser } = await supabase
+        .from('users')
+        .select('id')
+        .eq('clerk_id', data.id)
+        .single()
+
+    if (existingUser) {
+        console.log(`User already exists: ${email}`)
+        return
+    }
+
     const { error } = await supabase.from('users').insert({
         clerk_id: data.id,
         email,
