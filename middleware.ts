@@ -6,6 +6,7 @@ const isPublicRoute = createRouteMatcher([
     '/api/products(.*)',
     '/api/categories(.*)',
     '/api/carousel(.*)',
+    '/api/webhooks(.*)',  // Clerk webhooks must be public
     '/'
 ])
 
