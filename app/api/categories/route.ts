@@ -33,8 +33,7 @@ export async function POST(request: NextRequest) {
             name: body.name,
             slug: slug,
             description: body.description || null,
-            image: body.image || null,
-            icon: body.icon || null,
+            // image and icon removed as column likely doesn't exist
             is_active: body.isActive !== false
         }
 
